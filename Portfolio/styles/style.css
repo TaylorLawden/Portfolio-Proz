@@ -1,7 +1,8 @@
 body {
-    background-image: url('céu_Estrelado_Site.jpg');
+    background-image: url('/Portfolio/imagens/céu_Estrelado_Site.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+
 }
