@@ -36,7 +36,6 @@ document.getElementById("minhaBio").textContent = minhaBio;
 
 //Data de Termino do Curso
 document.getElementById("anoFormatura").textContent = "Ano de formatura: " + anoFormatura;
-//document.getElementById("tempoRestanteParaFormatura").textContent = "Tempo restante para a formatura: " + (anoFormatura - anoAtual) + " anos, " + (mesFormatura - mesAtual) + " meses, " + (diaFormatura - diaAtual) + " dias";
 
 let partes = [];
 
@@ -105,3 +104,61 @@ switch (diaSemana) {
 }
 
 document.write(`<p> Hoje é: ${diaEscrito} </p>`);
+
+
+//=========Quiz============
+// ─── QUIZ Sobre a vida / espaço ───────────────────────────────────────────
+const btnVisual      = document.getElementById("btn-visual");
+const btnLogica      = document.getElementById("btn-logica");
+const resultadoQuiz  = document.getElementById("resultado-quiz");
+
+btnVisual.addEventListener("click", function() {
+  
+  resultadoQuiz.innerHTML = `
+    <strong>🎨 Você tem perfil Front-End!</strong><br>
+    Você curte criar interfaces, trabalhar com cores, layouts e a experiência do usuário.
+    Tecnologias pra você: HTML, CSS, React, Vue.
+  `;
+  resultadoQuiz.style.backgroundColor = "#e8f4fd";
+  resultadoQuiz.style.padding          = "12px";
+  resultadoQuiz.style.borderRadius     = "8px";
+  resultadoQuiz.style.marginTop        = "10px";
+});
+
+btnLogica.addEventListener("click", function() {
+  
+//Pontuação das escolhas
+let pontosFront  = 0;
+let pontosBack   = 0;
+
+btnVisual.addEventListener("click", function() {
+  pontosFront++;
+  exibirPerfil();
+});
+
+btnLogica.addEventListener("click", function() {
+  pontosBack++;
+  exibirPerfil();
+});
+
+//Resultado do quiz
+function exibirPerfil() {  
+  if (pontosFront > pontosBack) {
+    resultadoQuiz.textContent = "🎨 Perfil Front-End!";
+  } else if (pontosBack > pontosFront) {
+    resultadoQuiz.textContent = "⚙️ Perfil Back-End!";
+  } else {
+    resultadoQuiz.textContent = "🔄 Perfil Full Stack — você é dos dois!";
+  }
+}
+
+resultadoQuiz.innerHTML = `
+    <strong>⚙️ Você tem perfil Back-End!</strong><br>
+    Você curte resolver problemas complexos, trabalhar com dados e fazer a mágica acontecer nos bastidores.
+    Tecnologias pra você: Node.js, Python, bancos de dados.
+  `;
+  resultadoQuiz.style.backgroundColor = "#e8f8f0";
+  resultadoQuiz.style.padding          = "12px";
+  resultadoQuiz.style.borderRadius     = "8px";
+  resultadoQuiz.style.marginTop        = "10px";
+});

@@ -1,7 +1,7 @@
 body {
     background-image: url('/Portfolio/imagens/céu_Estrelado_Site.png');
-    background-size: x=180px y=150px;
-    background-position: center;
+    background-size: 100% 103px;
+    background-position: top left;
     background-repeat: no-repeat;
     background-attachment: fixed;
 
