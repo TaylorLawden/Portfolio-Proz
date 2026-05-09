@@ -114,8 +114,8 @@ console.log(typeof nulo);
 // =========Quiz============
 // ─── QUIZ Sobre a vida / espaço ───────────────────────────────────────────
 
-const btnVisual     = document.getElementById("btn-visual");
-const btnLogica     = document.getElementById("btn-logica");
+const btnVisual     = document.getElementById("escolhaExperencial");     // Botão para escolher a opção "Visual" (por isso BTN)
+const btnLogica     = document.getElementById("EscolhaLogica");          // Botão para escolher a opção "Lógica" (por isso BTN)
 const resultadoQuiz = document.getElementById("resultado-quiz");
 
 // Elemento que mostra o texto da pergunta (você vai precisar criar esse no HTML)
@@ -128,19 +128,19 @@ let indice      = 0; // Controla qual pergunta estamos
 // ─── Todas as perguntas e opções ──────────────────────────────────────────
 const perguntas = [
   {
-    pergunta: "Como você prefere passar seu tempo livre?",
-    opcaoVisual: "🎨 Explorando lugares e vivendo experiências",
-    opcaoLogica: "📚 Lendo, estudando ou resolvendo problemas"
+    pergunta: "Como você enxerga a vida?",
+    opcaoVisual: "🎨 Como algo que eu tenho que aproveitar ao máximo enquanto posso, sem me preocupar muito.",
+    opcaoLogica: "📚 Como algo que eu tenho que entender profundamente, mesmo que isso me cause sofrimento por entender demais."
   },
   {
     pergunta: "Quando algo dá errado, você normalmente...",
-    opcaoVisual: "😤 Sente tudo na hora, mas logo segue em frente",
-    opcaoLogica: "🤔 Para e analisa o que aconteceu com calma"
+    opcaoVisual: "😤 Sente tudo na hora, mas logo segue em frente. É melhor viver o momento do que se preocupar com algo que já aconteceu.",
+    opcaoLogica: "🤔 Para e analisa o que aconteceu com calma. Sempre tem uma forma de resolver as coisas."
   },
   {
-    pergunta: "O que te deixa mais satisfeito?",
-    opcaoVisual: "🎉 Aproveitar o momento e criar memórias",
-    opcaoLogica: "🔍 Entender como as coisas funcionam de verdade"
+    pergunta: "O que mais te interessa?",
+    opcaoVisual: "🎉 Aproveitar o momento e criar memórias.",
+    opcaoLogica: "🔍 Entender como as coisas funcionam de verdade."
   }
 ];
 
@@ -210,6 +210,20 @@ mostrarPergunta();
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+//========= Minhas habilidades =============
+const habilidades = ["HTML", "CSS", "JavaScript", "Python", "Design", "Engenharia de Prompts", "Criatividade"];
+
+let lista = "<ul>";
+
+for (let i = 0; i < habilidades.length; i++) {
+  lista += "<li>" + habilidades[i] + "</li>";
+}
+
+lista += "</ul>";
+
+document.getElementById("minhasHabilidades").innerHTML = lista;
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /*Gatilho inicial/começo*/ /*limite, limitador, roda enquanto*/ /*Incremento e decremento  
 for (let i = 0; i <= 20;i++) {
   let pares = (i % 2 === 0) ? "Par" : "Ímpar";
