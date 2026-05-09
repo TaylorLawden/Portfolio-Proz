@@ -213,15 +213,15 @@ mostrarPergunta();
 //========= Minhas habilidades =============
 const habilidades = ["HTML", "CSS", "JavaScript", "Python", "Design", "Engenharia de Prompts", "Criatividade"];
 
-let lista = "<ul>";
+let lista = "<ul>";           // i começa em 0 (primeiro item do array). O loop roda enquanto i for menor que o tamanho do array. i++ aumenta o contador em 1 a cada volta
 
-for (let i = 0; i < habilidades.length; i++) {
-  lista += "<li>" + habilidades[i] + "</li>";
+for (let i = 0; i < habilidades.length; i++) {       // A cada volta, pega o item da posição i e envolve em uma tag <li>
+  lista += "<li>" + habilidades[i] + "</li>";        // Exemplo: na volta 0 → <li>HTML</li>, na volta 1 → <li>CSS</li>...
 }
 
-lista += "</ul>";
+lista += "</ul>";       // Fecha a lista HTML depois que o loop terminar
 
-document.getElementById("minhasHabilidades").innerHTML = lista;
+document.getElementById("minhasHabilidades").innerHTML = lista;    // Injeta a lista montada dentro do elemento com id "minhasHabilidades"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /*Gatilho inicial/começo*/ /*limite, limitador, roda enquanto*/ /*Incremento e decremento  
