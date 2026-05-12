@@ -223,8 +223,50 @@ lista += "</ul>";       // Fecha a lista HTML depois que o loop terminar
 
 document.getElementById("minhasHabilidades").innerHTML = lista;    // Injeta a lista montada dentro do elemento com id "minhasHabilidades"
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    /*Gatilho inicial/começo*/ /*limite, limitador, roda enquanto*/ /*Incremento e decremento  
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// ========= Meus Projetos =============
+let projetos = [    // Cada projeto é um objeto com nome, tecnologias usadas, conhecimentos aplicados, descrição e o que tive que aguentar para fazer o projeto
+  {
+    nome: "Aplicação de Estacionamento",
+    tecnologias: ["Python", "Tkinter", "Sqlite", "Paint"],
+    conhecimentos: "VsCode, GitHub, pip, PyInstaller...",
+    descricao: "Aplicação desktop para gerenciamento de estacionamento, com funcionalidades de cadastro de veículos, controle de vagas disponíveis e a quantidade de veículos estacionados e as horas de entrada e saída junto dos valores.",
+    oQueTenhoQueAturar: ["Minha falta de conhecimento", "Preguiça do Rafael"]
+  },
+  {
+    nome: "Aplicação de Caixa de Hamburgueria",
+    tecnologias: ["Python", "Tkinter", "Sqlite", "Paint"],
+    conhecimentos: "VsCode, GitHub, pip, PyInstaller...",
+    descricao: "Aplicação desktop para gerenciamento de caixa de hamburgueria, com funcionalidades de cadastro de pedidos, calculo do total vendido e histórico de vendas.",
+    oQueTenhoQueAturar: ["Minha falta de conhecimento", "Os perdidos de Responsividade", "Organização do Front-End"]
+  }
+];
+
+const container = document.getElementById("listaProjetos"); // Pega o container no HTML onde os projetos vão ser exibidos
+
+for (let i = 0; i < projetos.length; i++) {  // Percorre todos os projetos do array, e para cada projeto, cria um bloco de HTML com as informações do projeto e injeta no container
+  const projeto = projetos[i]; // ⚠️ Era "projetos" igual ao array — nome trocado para "projeto" para representar o item atual do loop
+
+  // Cria um bloco de HTML para exibir as informações do projeto, usando template literals para inserir os dados dinamicamente
+  container.innerHTML += `
+    <div class="projeto"> 
+      <h2>${projeto.nome}</h2>
+      <p><strong>Descrição:</strong> ${projeto.descricao}</p>
+      <p><strong>Tecnologias:</strong> ${projeto.tecnologias.join(", ")}</p>
+      <p><strong>Conhecimentos usados:</strong> ${projeto.conhecimentos}</p>
+      <p><strong>O que tive que aguentar:</strong></p>
+      <ul>
+        ${projeto.oQueTenhoQueAturar.map(item => `<li>${item}</li>`).join("")}
+      </ul>
+    </div>
+  `;
+}
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//======== Estruturas de Controle (Condicionais e Loops) =============    
+/*Gatilho inicial/começo*/ /*limite, limitador, roda enquanto*/ /*Incremento e decremento  
 for (let i = 0; i <= 20;i++) {
   let pares = (i % 2 === 0) ? "Par" : "Ímpar";
   console.log(`${i} é ${pares}`);
@@ -259,3 +301,42 @@ do {
   num = prompt ("Prompt 2 - Diga um número par:");
 } while (num % 2 !== 0);
 */
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// =========== Aula (12/05/2026) de Arrays e Objetos ===========
+/*debugger; // Serve para pausar a execução do código nesse ponto, permitindo que você inspecione variáveis e o fluxo do programa no console do navegador. É uma ferramenta útil para encontrar e corrigir erros no código.
+'use strict'; // Ativa o modo estrito, que ajuda a identificar erros comuns e a escrever um código mais seguro. Por exemplo, ele impede o uso de variáveis não declaradas, o que pode evitar muitos bugs.
+document.write("<p>Olá, mundo!</p>"); 
+
+let frutas = ["Maçã", "Banana", "Laranja"];
+
+frutas.pop(); // Remove o último item do array (Laranja)
+
+frutas.push("Uva", "Cereja"); // Adiciona novos itens ao final do array (Uva, Cereja)
+
+frutas.unshift("Abacaxi", "Nactarina"); // Adiciona um item no início do array (Abacaxi e Nactarina)
+
+frutas.shift(); // Remove o primeiro item do array (Abacaxi)
+
+console.log(frutas); // Exibe o array atualizado no console (Nactarina, Maçã, Banana, Uva, Cereja)
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+console.log(frutas.indexOf("Banana")); // Retorna o índice do item "Banana" no array (2)
+console.log(frutas.includes("Kiwi")); // Verifica se o item "Kiwi" está presente no array (false)
+console.log(frutas.length); // Retorna o número de itens no array (5)
+
+frutas.forEach(function(fruta) {
+  console.log(fruta); // Exibe cada fruta do array no console (Nactarina, Maçã, Banana, Uva, Cereja)
+});
+
+frutas.splice(2, 1, "Melancia"); // Remove o item no índice 2 e adiciona "Melancia" no lugar
+console.log(frutas); // Exibe o array atualizado no console (Nactarina, Maçã, Melancia, Uva, Cereja)
+
+frutas.splice(1, 0, "Pera"); // Adiciona "Pera" no índice 1 sem remover nenhum item
+console.log(frutas); // Exibe o array atualizado no console (Nactarina, Pera, Maçã, Melancia, Uva, Cereja)
+
+frutas.splice(3, 2); // Remove 2 itens a partir do índice 3 (Melancia e Uva)
+console.log(frutas); // Exibe o array atualizado no console (Nactarina, Pera, Maçã, Cereja)
+*/
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
