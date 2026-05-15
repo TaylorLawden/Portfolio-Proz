@@ -1,256 +1,323 @@
-const NOME = "Luiz Fernandes";
-let tituloProfissional = "Desenvolvedor de Sistemas / Faço de Tudo";
-let minhaBio = "Sou um desenvolvedor em processo de aprendizado. Estou cursando atualmente o curso de Desenvolvimento de Sistemas na instituição Proz Educação";
-let anoFormatura = 2026;
-let mesFormatura = "12";
-let diaFormatura = "31";
-let anoIngresso = 2025;
-let mesIngresso = "2";
-let diaIngresso = "12";
+// ─── Data atual ───────────────────────────────────────────────────────────
+const hoje     = new Date();     // Pega a data atual
+const anoAtual = hoje.getFullYear();     // Extrai o ano atual
+const mesAtual = hoje.getMonth() + 1;     // Extrai o mês atual (começa do 0, por isso soma 1)
+const diaAtual = hoje.getDate();     // Extrai o dia atual
 
-//Serve para pegar a data atual do sistema, e a partir disso calcular o tempo restante para a formatura, ou seja, quantos anos, meses e dias faltam para a formatura.
-let hoje = new Date();     //Issso vai criar uma função que vai procurar em uma bibliotaca a data atual.
-let mesAtual = hoje.getMonth() + 1;   //Aqui ele vai pegar o mês atual, e como os meses começam do 0, a gente soma 1 para ter o número correto do mês.
-let anoAtual = hoje.getFullYear();     //Aqui ele vai pegar o ano atual.
-let diaAtual = hoje.getDate();        //Aqui ele vai pegar o dia atual.
 
-let indefinido;
-let nulo = null;
-let curso = {
-    nome: "Desenvolvimento de Sistemas",
-    instituicao: "Proz Educação",
-    duracao: "2 anos"
+
+// ─── Função que CRIA o objeto com os dados pessoais ──────────────────────
+function criarPerfil(nome, tituloProfissional, bio, anoFormatura, mesFormatura, diaFormatura, anoIngresso, mesIngresso, diaIngresso) {     // Recebe todos os dados pessoais como parâmetros
+  return {     // Devolve um objeto com todos os dados organizados
+    nome:               nome,     // Nome completo
+    tituloProfissional: tituloProfissional,     // Título profissional
+    bio:                bio,     // Biografia
+    anoFormatura:       anoFormatura,     // Ano de formatura
+    mesFormatura:       mesFormatura,     // Mês de formatura
+    diaFormatura:       diaFormatura,     // Dia de formatura
+    anoIngresso:        anoIngresso,     // Ano de ingresso no curso
+    mesIngresso:        mesIngresso,     // Mês de ingresso no curso
+    diaIngresso:        diaIngresso      // Dia de ingresso no curso
+  };
 }
-//Isso é para exibir no console o tipo da varaiável, para verificar se é string, number, boolean, etc.
-console.log(typeof nulo);
-console.log(typeof indefinido);
-console.log(typeof anoFormatura);
-console.log(typeof minhaBio);
-console.log(typeof tituloProfissional);
-console.log(typeof NOME);
-console.log(typeof curso);
 
-document.getElementById("meuNome").textContent = NOME;
-document.getElementById("tituloProfissional").innerHTML = tituloProfissional;
-document.getElementById("minhaBio").textContent = minhaBio;
+// ─── Função que exibe os dados do perfil na página ───────────────────────
+function exibirInformacoesPessoais(nome, titulo, bio) {     // Recebe o nome, título e bio como parâmetros
+  document.getElementById("meuNome").textContent          = nome;     // Injeta o nome no elemento HTML correspondente
+  document.getElementById("tituloProfissional").innerHTML = titulo;     // Injeta o título no elemento HTML correspondente
+  document.getElementById("minhaBio").textContent         = bio;     // Injeta a bio no elemento HTML correspondente
+}
+
+// ─── Cria o perfil chamando a função com os valores ──────────────────────
+const perfil = criarPerfil(     // Chama a função passando todos os dados e guarda o objeto retornado
+  "Luiz Fernandes",     // Nome
+  "Desenvolvedor de Sistemas / Faço de Tudo",     // Título profissional
+  "Sou um desenvolvedor em processo de aprendizado. Estou cursando atualmente o curso de Desenvolvimento de Sistemas na instituição Proz Educação",     // Bio
+  2026, "12", "31",     // Ano, mês e dia de formatura
+  2025, "2",  "12"      // Ano, mês e dia de ingresso
+);
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 // ========= Data de Termino do Curso ============
-document.getElementById("anoFormatura").textContent = "Ano de formatura: " + anoFormatura;
 
-let partes = [];
-
-// Anos
-if (anoFormatura - anoAtual === 1) {
-    partes.push(`${anoFormatura - anoAtual} ano`);
-} else if (anoFormatura - anoAtual > 1) {
-    partes.push(`${anoFormatura - anoAtual} anos`);
+// ─── Função que CRIA a parte do tempo (ano, mês ou dia) ──────────────────
+function criarParte(diferenca, singular, plural) {     // Recebe a diferença (de valor), o nome no singular (Exemplo: 1 ano) e no plural (Exemplo: 2 anos)
+  if (diferenca === 1) return `${diferenca} ${singular}`;     // Se a diferença for 1, usa o singular (ex: "1 ano")
+  if (diferenca > 1)  return `${diferenca} ${plural}`;     // Se for maior que 1, usa o plural (ex: "2 anos")
+  return null;     // Se for 0 ou negativo, não tem nada a mostrar
 }
 
-// Meses
-if (mesFormatura - mesAtual === 1) {
-    partes.push(`${mesFormatura - mesAtual} mês`);
-} else if (mesFormatura - mesAtual > 1) {
-    partes.push(`${mesFormatura - mesAtual} meses`);
+// ─── Função que CRIA a frase completa do tempo restante ──────────────────
+function criarTempoRestante(anoFormatura, mesFormatura, diaFormatura, anoAtual, mesAtual, diaAtual) {     // Recebe as datas de formatura e atual como parâmetros
+  const partes = [];     // Array que vai guardar cada parte do tempo restante
+
+  const parteAnos  = criarParte(anoFormatura - anoAtual, "ano", "anos");     // Cria a parte dos anos
+  const parteMeses = criarParte(mesFormatura - mesAtual, "mês", "meses");     // Cria a parte dos meses
+  const parteDias  = criarParte(diaFormatura - diaAtual, "dia", "dias");     // Cria a parte dos dias
+
+  if (parteAnos)  partes.push(parteAnos);     // Se tiver anos restantes, adiciona ao array
+  if (parteMeses) partes.push(parteMeses);     // Se tiver meses restantes, adiciona ao array
+  if (parteDias)  partes.push(parteDias);     // Se tiver dias restantes, adiciona ao array
+
+  if (partes.length > 0) {     // Se ainda houver tempo restante...
+    return `Tempo restante para a formatura: ${partes.join(", ")}`;     // ...junta tudo em uma frase
+  } else {     // Se não houver mais tempo restante...
+    return `Já se formou!`;     // ...retorna a mensagem de formatura
+  }
 }
 
-// Dias
-if (diaFormatura - diaAtual === 1) {
-    partes.push(`${diaFormatura - diaAtual} dia`);
-} else if (diaFormatura - diaAtual > 1) {
-    partes.push(`${diaFormatura - diaAtual} dias`);
-}
+// ─── Função que exibe tudo na página ─────────────────────────────────────
+function exibirFormatura() {     // Chamada para mostrar as informações de formatura na página
+  document.getElementById("anoFormatura").textContent =
+    "Ano de formatura: " + perfil.anoFormatura;     // ✅ Corrigido — agora usa perfil.anoFormatura
 
-// Junta tudo em uma frase
-if (partes.length > 0) {
-    document.getElementById("tempoRestanteParaFormatura").innerText =
-        `Tempo restante para a formatura: ${partes.join(", ")}`;
-} else {
-    document.getElementById("tempoRestanteParaFormatura").innerText =
-        `Já se formou!`;
+  const frase = criarTempoRestante(     // Chama a função que calcula e monta a frase do tempo restante
+    perfil.anoFormatura, perfil.mesFormatura, perfil.diaFormatura,     // ✅ Corrigido — agora usa os dados do objeto perfil
+    anoAtual, mesAtual, diaAtual     // Passa as datas atuais
+  );
+
+  document.getElementById("tempoRestanteParaFormatura").innerText = frase;     // Injeta a frase na página
+}
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// ─── Função que CRIA o relatório dos tipos das variáveis ─────────────────
+function criarRelatorioTipos(variaveis) {     // Recebe um objeto com o nome e o valor de cada variável
+  for (let chave in variaveis) {     // Percorre cada item do objeto recebido
+    console.log(`${chave}: ${typeof variaveis[chave]}`);     // Exibe no console o nome e o tipo de cada variável
+  }
 }
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 //======== Isso serve para mostrar quando da semana estamos ==========
-let diaSemana = hoje.getDay() + 1; //Aqui ele vai pegar o dia da semana atual, e como os dias começam do 0, a gente soma 1 para ter o número correto do dia da semana.
 
-let diaEscrito;
-
-switch (diaSemana) {
-    case 1: diaEscrito = "Domingo"; break;
-    case 2: diaEscrito = "Segunda-feira"; break;
-    case 3: diaEscrito = "Terça-feira"; break;
-    case 4: diaEscrito = "Quarta-feira"; break;
-    case 5: diaEscrito = "Quinta-feira"; break;
-    case 6: diaEscrito = "Sexta-feira"; break;
-    case 7: diaEscrito = "Sábado"; break;
-    default: diaEscrito = "Dia inválido";
+// ─── Função que CRIA o nome do dia baseado no número ─────────────────────
+function criarDiaSemana(diaSemana) {     // Recebe o número do dia da semana como parâmetro
+  switch (diaSemana) {     // Verifica qual número foi recebido e retorna o nome correspondente
+    case 1: return "Domingo";     // Se for 1, devolve "Domingo"
+    case 2: return "Segunda-feira";     // Se for 2, devolve "Segunda-feira"
+    case 3: return "Terça-feira";     // Se for 3, devolve "Terça-feira"
+    case 4: return "Quarta-feira";     // Se for 4, devolve "Quarta-feira"
+    case 5: return "Quinta-feira";     // Se for 5, devolve "Quinta-feira"
+    case 6: return "Sexta-feira";     // Se for 6, devolve "Sexta-feira"
+    case 7: return "Sábado";     // Se for 7, devolve "Sábado"
+    default: return "Dia inválido";     // Se não for nenhum dos casos, devolve "Dia inválido"
+  }
 }
 
-document.write(`<p> Hoje é: ${diaEscrito} </p>`);
+// ─── Função que exibe o dia da semana na página ───────────────────────────
+function exibirDiaSemana() {     // Chamada para mostrar o dia atual na página
+  const diaSemana  = hoje.getDay() + 1;     // Pega o dia atual (começa do 0, por isso soma 1)
+  const diaEscrito = criarDiaSemana(diaSemana);     // Chama a função que converte o número no nome do dia
+
+  document.getElementById("diaSemana").innerHTML = `<p>Hoje é: ${diaEscrito}</p>`;     // Injeta o dia na página
+}
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-// ======== Isso serve para mostrar o modo claro e escuro, e alternar entre eles quando o usuário clicar no botão ========
-const botao = document.getElementById("modoClaro/Escuro")
+// ======== Modo claro e escuro ========
 
-let claro = true;
-botao.addEventListener("click", function() {
-    if (claro) {
-        document.body.style.backgroundColor = "black";
-        document.body.style.color = "white";
-        botao.textContent = "Modo Escuro";
-    } else {
-        document.body.style.backgroundColor = "white";
-        document.body.style.color = "black";
-        botao.textContent = "Modo Claro";
-    }
-    claro = !claro;
-})
+const botao = document.getElementById("modoClaro/Escuro");     // Pega o botão no HTML pelo seu ID
 
-console.log(typeof nulo);
+let claro = true;     // Variável que controla qual modo está ativo no momento (começa no modo claro)
+
+// ─── Função que CRIA o objeto com as configurações de cada modo ───────────
+function criarModo(corFundo, corTexto, textoBotao) {     // Recebe as 3 configurações do modo como parâmetros
+  return {     // Devolve um objeto com os dados organizados
+    corFundo:   corFundo,     // Cor de fundo da página
+    corTexto:   corTexto,     // Cor do texto da página
+    textoBotao: textoBotao    // Texto que o botão vai exibir
+  };
+}
+
+// ─── Função que aplica o modo na página ───────────────────────────────────
+function aplicarModo() {     // Chamada sempre que o botão for clicado
+  const modo = claro     // ✅ Corrigido — agora declara modo com const para evitar variável global
+    ? criarModo("black", "white", "Modo Claro")     // Modo escuro: fundo preto, texto branco, botão diz "Modo Claro"
+    : criarModo("white", "black", "Modo Escuro");     // Modo claro: fundo branco, texto preto, botão diz "Modo Escuro"
+
+  document.body.style.backgroundColor = modo.corFundo;     // Aplica a cor de fundo na página
+  document.body.style.color           = modo.corTexto;     // Aplica a cor do texto na página
+  botao.textContent                   = modo.textoBotao;     // Atualiza o texto do botão
+
+  claro = !claro;     // Inverte o estado: se era true vira false, se era false vira true
+}
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 // =========Quiz============
 // ─── QUIZ Sobre a vida / espaço ───────────────────────────────────────────
 
-const btnVisual     = document.getElementById("escolhaExperencial");     // Botão para escolher a opção "Visual" (por isso BTN)
-const btnLogica     = document.getElementById("EscolhaLogica");          // Botão para escolher a opção "Lógica" (por isso BTN)
-const resultadoQuiz = document.getElementById("resultado-quiz");
+const btnVisual     = document.getElementById("escolhaExperencial");     // Pega o botão "Visual" no HTML pelo seu ID
+const btnLogica     = document.getElementById("escolhaLogica");          // Pega o botão "Lógica" no HTML pelo seu ID
+const resultadoQuiz = document.getElementById("resultado-quiz");     // Pega o elemento que vai exibir o resultado final
+const textoPergunta = document.getElementById("texto-pergunta");     // Pega o elemento que vai exibir o texto da pergunta atual
 
-// Elemento que mostra o texto da pergunta (você vai precisar criar esse no HTML)
-const textoPergunta = document.getElementById("texto-pergunta");
+let pontosFront = 0;     // Contador de pontos do perfil "Experienciador"
+let pontosBack  = 0;     // Contador de pontos do perfil "Observador"
+let indice      = 0;     // Controla qual pergunta está sendo exibida no momento
 
-let pontosFront = 0;
-let pontosBack  = 0;
-let indice      = 0; // Controla qual pergunta estamos
+// ─── Função que CRIA cada objeto de pergunta ──────────────────────────────
+function criarPergunta(pergunta, opcaoVisual, opcaoLogica) {     // Recebe os 3 dados de cada pergunta como parâmetros
+  return {     // Devolve um objeto com os dados organizados
+    pergunta:    pergunta,     // Texto da pergunta
+    opcaoVisual: opcaoVisual,     // Texto do botão Visual
+    opcaoLogica: opcaoLogica      // Texto do botão Lógica
+  };
+}
 
-// ─── Todas as perguntas e opções ──────────────────────────────────────────
-const perguntas = [
-  {
-    pergunta: "Como você enxerga a vida?",
-    opcaoVisual: "🎨 Como algo que eu tenho que aproveitar ao máximo enquanto posso, sem me preocupar muito.",
-    opcaoLogica: "📚 Como algo que eu tenho que entender profundamente, mesmo que isso me cause sofrimento por entender demais."
-  },
-  {
-    pergunta: "Quando algo dá errado, você normalmente...",
-    opcaoVisual: "😤 Sente tudo na hora, mas logo segue em frente. É melhor viver o momento do que se preocupar com algo que já aconteceu.",
-    opcaoLogica: "🤔 Para e analisa o que aconteceu com calma. Sempre tem uma forma de resolver as coisas."
-  },
-  {
-    pergunta: "O que mais te interessa?",
-    opcaoVisual: "🎉 Aproveitar o momento e criar memórias.",
-    opcaoLogica: "🔍 Entender como as coisas funcionam de verdade."
-  }
+// ─── Todas as perguntas criadas pela função ───────────────────────────────
+const perguntas = [     // Array que guarda todos os objetos de pergunta
+  criarPergunta(
+    "Como você enxerga a vida?",
+    "🎨 Como algo que eu tenho que aproveitar ao máximo enquanto posso, sem me preocupar muito.",
+    "📚 Como algo que eu tenho que entender profundamente, mesmo que isso me cause sofrimento por entender demais."
+  ),
+  criarPergunta(
+    "Quando algo dá errado, você normalmente...",
+    "😤 Sente tudo na hora, mas logo segue em frente. É melhor viver o momento do que se preocupar com algo que já aconteceu.",
+    "🤔 Para e analisa o que aconteceu com calma. Sempre tem uma forma de resolver as coisas."
+  ),
+  criarPergunta(
+    "O que mais te interessa?",
+    "🎉 Aproveitar o momento e criar memórias.",
+    "🔍 Entender como as coisas funcionam de verdade."
+  )
 ];
 
 // ─── Função que atualiza a pergunta e os botões na tela ───────────────────
-function mostrarPergunta() {
-  const atual = perguntas[indice];
+function mostrarPergunta() {     // Chamada sempre que precisar exibir a pergunta atual
+  const atual = perguntas[indice];     // Pega o objeto da pergunta na posição do índice atual
 
-  textoPergunta.innerHTML    = atual.pergunta;
-  btnVisual.innerHTML        = atual.opcaoVisual;
-  btnLogica.innerHTML        = atual.opcaoLogica;
+  textoPergunta.innerHTML = atual.pergunta;     // Coloca o texto da pergunta no elemento HTML
+  btnVisual.innerHTML     = atual.opcaoVisual;     // Atualiza o texto do botão Visual
+  btnLogica.innerHTML     = atual.opcaoLogica;     // Atualiza o texto do botão Lógica
+}
+
+// ─── Função que monta o HTML do resultado ─────────────────────────────────
+function criarResultado(tipo) {     // Recebe "experienciador" ou "observador" e devolve o HTML do resultado
+  if (tipo === "experienciador") {     // Se o perfil for experienciador, monta esse bloco
+    return {
+      html: `
+        <strong>🎨 Você tem o perfil de um experienciador</strong><br>
+        Você é alguém que prefere viver a vida sem questionar demais, focando no que é imediato e tangível.
+        O problema é que você acaba se limitando a um mundo de sensações e experiências, sem conseguir enxergar como o mundo funciona de verdade.
+        O preço da sua felicidade é a sua efemeridade.
+      `,
+      cor: "#e8f8f0"     // Cor de fundo verde para o perfil experienciador
+    };
+  } else {     // Se não, monta o bloco do perfil observador
+    return {
+      html: `
+        <strong>⚙️ Você tem o perfil de um observador</strong><br>
+        Você gosta de analisar detalhes, observar o ambiente e perceber coisas que outros podem não notar.
+        O problema é que por ser muito racional, você pode acabar entrando em uma melancolia existencial.
+        Comemore suas vitórias, mas sempre com moderação.
+      `,
+      cor: "#e8f4fd"     // Cor de fundo azul para o perfil observador
+    };
+  }
 }
 
 // ─── Função que calcula e exibe o resultado final ─────────────────────────
-function exibirPerfil() {
-  // Esconde os botões depois do quiz acabar
-  btnVisual.style.display = "none";
-  btnLogica.style.display = "none";
+function exibirPerfil() {     // ✅ Corrigido — não recebe mais parâmetro, pois é do quiz
+  btnVisual.style.display = "none";     // Esconde o botão Visual pois o quiz acabou
+  btnLogica.style.display = "none";     // Esconde o botão Lógica pois o quiz acabou
 
-  if (pontosFront >= pontosBack) {
-    resultadoQuiz.innerHTML = `
-      <strong>🎨 Você tem o perfil de um experienciador</strong><br>
-      Você é alguém que prefere viver a vida sem questionar demais, focando no que é imediato e tangível.
-    O problema é que você acaba se limitando a um mundo de sensações e experiências, sem conseguir enxergar como o mundo funciona de verdade. Você pode até se divertir, mas não tem a menor ideia do que está acontecendo por trás das cortinas. O preço da sua felicidade é a a sua efemeridade.
-    `;
-    resultadoQuiz.style.backgroundColor = "#e8f8f0";
-  } else {
-    resultadoQuiz.innerHTML = `
-      <strong>⚙️ Você tem o perfil de um observador</strong><br>
-      Você gosta de analisar detalhes, observar o ambiente e perceber coisas que outros podem não notar. Você é curioso e gosta de aprender sobre o mundo ao seu redor.
-    O problema é que por ser muito racional e lógico, você pode acabar entrando em uma melancolia existencial, acreditando que a sua vida e conquistas são insignificantes perante a passagem do tempo, mas não é. Você deve começar a viver a vida comemorando as suas vitorias, mas sempre com moderação, para não cair na armadilha de se tornar apenas um experienciador.
-    `;
-    resultadoQuiz.style.backgroundColor = "#e8f4fd";
-  }
+  const tipo      = pontosFront >= pontosBack ? "experienciador" : "observador";     // Define o perfil comparando os pontos
+  const resultado = criarResultado(tipo);     // Chama a função que monta o HTML do resultado
 
-  resultadoQuiz.style.padding      = "12px";
-  resultadoQuiz.style.borderRadius = "8px";
-  resultadoQuiz.style.marginTop    = "10px";
+  resultadoQuiz.innerHTML             = resultado.html;     // Injeta o HTML do resultado na página
+  resultadoQuiz.style.backgroundColor = resultado.cor;     // Aplica a cor de fundo do perfil
+  resultadoQuiz.style.padding         = "12px";     // Adiciona espaçamento interno ao bloco de resultado
+  resultadoQuiz.style.borderRadius    = "8px";     // Arredonda as bordas do bloco de resultado
+  resultadoQuiz.style.marginTop       = "10px";     // Adiciona espaço acima do bloco de resultado
 }
 
 // ─── Função chamada quando qualquer botão é clicado ───────────────────────
-function proximaPergunta(tipo) {
-  // Soma o ponto do perfil escolhido
-  if (tipo === "visual") pontosFront++;
-  if (tipo === "logica") pontosBack++;
+function proximaPergunta(tipo) {     // Recebe "visual" ou "logica" dependendo do botão clicado
+  if (tipo === "visual") pontosFront++;     // Se clicou no Visual, soma 1 ponto no perfil Experienciador
+  if (tipo === "logica") pontosBack++;     // Se clicou no Lógica, soma 1 ponto no perfil Observador
 
-  indice++; // Avança para a próxima pergunta
+  indice++;     // Avança o índice para a próxima pergunta
 
-  if (indice < perguntas.length) {
-    mostrarPergunta(); // Ainda tem perguntas → mostra a próxima
-  } else {
-    exibirPerfil();    // Acabou → mostra o resultado
+  if (indice < perguntas.length) {     // Se ainda houver perguntas...
+    mostrarPergunta();     // ...exibe a próxima pergunta
+  } else {     // Se não houver mais perguntas...
+    exibirPerfil();     // ...calcula e exibe o resultado final
   }
 }
 
 // ─── Eventos dos botões ───────────────────────────────────────────────────
-btnVisual.addEventListener("click", function() {
-  proximaPergunta("visual");
+btnVisual.addEventListener("click", function() {     // Quando o botão Visual for clicado...
+  proximaPergunta("visual");     // ...chama a função passando "visual" como tipo
 });
 
-btnLogica.addEventListener("click", function() {
-  proximaPergunta("logica");
+btnLogica.addEventListener("click", function() {     // Quando o botão Lógica for clicado...
+  proximaPergunta("logica");     // ...chama a função passando "logica" como tipo
 });
-
-// ─── Inicia o quiz mostrando a primeira pergunta ──────────────────────────
-mostrarPergunta();
-
-// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 //========= Minhas habilidades =============
-const habilidades = ["HTML", "CSS", "JavaScript", "Python", "Design", "Engenharia de Prompts", "Criatividade"];
+function criarHabilidades(habilidades) {     // Função que recebe o array de habilidades como parâmetro
+  let lista = "<ul>";     // Abre a tag ul que vai envolver todos os itens da lista
 
-let lista = "<ul>";           // i começa em 0 (primeiro item do array). O loop roda enquanto i for menor que o tamanho do array. i++ aumenta o contador em 1 a cada volta
+  for (let i = 0; i < habilidades.length; i++) {     // Loop que percorre cada item do array, de 0 até o último
+    lista += "<li>" + habilidades[i] + "</li>";     // A cada volta, pega a habilidade da posição i e envolve em <li>
+  }
 
-for (let i = 0; i < habilidades.length; i++) {       // A cada volta, pega o item da posição i e envolve em uma tag <li>
-  lista += "<li>" + habilidades[i] + "</li>";        // Exemplo: na volta 0 → <li>HTML</li>, na volta 1 → <li>CSS</li>...
+  lista += "</ul>";     // Fecha a tag ul depois que todas as habilidades foram adicionadas
+  return lista;     // Devolve a lista completa em HTML para quem chamou a função
 }
 
-lista += "</ul>";       // Fecha a lista HTML depois que o loop terminar
+function exibirHabilidades() {     // Função responsável por pegar o HTML gerado e colocar na página
+  const minhasHabilidades = ["HTML", "CSS", "JavaScript", "Python", "Design", "Engenharia de Prompts", "Criatividade"];     // Array com todas as habilidades
 
-document.getElementById("minhasHabilidades").innerHTML = lista;    // Injeta a lista montada dentro do elemento com id "minhasHabilidades"
+  const listaHTML = criarHabilidades(minhasHabilidades);     // Chama a função de criação passando o array, e guarda o HTML retornado
 
+  document.getElementById("minhasHabilidades").innerHTML = listaHTML;     // Injeta o HTML gerado dentro do elemento com id "minhasHabilidades"
+}
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// ========= Meus Projetos =============
-let projetos = [    // Cada projeto é um objeto com nome, tecnologias usadas, conhecimentos aplicados, descrição e o que tive que aguentar para fazer o projeto
-  {
-    nome: "Aplicação de Estacionamento",
-    tecnologias: ["Python", "Tkinter", "Sqlite", "Paint"],
-    conhecimentos: "VsCode, GitHub, pip, PyInstaller...",
-    descricao: "Aplicação desktop para gerenciamento de estacionamento, com funcionalidades de cadastro de veículos, controle de vagas disponíveis e a quantidade de veículos estacionados e as horas de entrada e saída junto dos valores.",
-    oQueTenhoQueAturar: ["Minha falta de conhecimento", "Preguiça do Rafael"]
-  },
-  {
-    nome: "Aplicação de Caixa de Hamburgueria",
-    tecnologias: ["Python", "Tkinter", "Sqlite", "Paint"],
-    conhecimentos: "VsCode, GitHub, pip, PyInstaller...",
-    descricao: "Aplicação desktop para gerenciamento de caixa de hamburgueria, com funcionalidades de cadastro de pedidos, calculo do total vendido e histórico de vendas.",
-    oQueTenhoQueAturar: ["Minha falta de conhecimento", "Os perdidos de Responsividade", "Organização do Front-End"]
-  }
+
+// ========= Meus Projetos Código =============
+
+// ─── Função que CRIA o objeto projeto com os valores que você passar ──────
+function criarProjeto(nome, tecnologias, conhecimentos, descricao, oQueTenhoQueAturar) {     // Recebe todos os dados do projeto como parâmetros
+  return {     // Devolve um objeto com os dados organizados
+    nome:               nome,     // Nome do projeto
+    tecnologias:        tecnologias,     // Array com as tecnologias usadas
+    conhecimentos:      conhecimentos,     // Ferramentas e conhecimentos aplicados
+    descricao:          descricao,     // Descrição do projeto
+    oQueTenhoQueAturar: oQueTenhoQueAturar     // Array com os desafios enfrentados
+  };
+}
+
+// ─── Cria cada projeto chamando a função com os valores ───────────────────
+let projetos = [     // Array que guarda todos os projetos criados
+  criarProjeto(
+    "Aplicação de Estacionamento",
+    ["Python", "Tkinter", "Sqlite", "Paint"],
+    "VsCode, GitHub, pip, PyInstaller...",
+    "Aplicação desktop para gerenciamento de estacionamento, com funcionalidades de cadastro de veículos, controle de vagas e horas de entrada e saída.",
+    ["Minha falta de conhecimento", "Preguiça do Rafael"]
+  ),
+  criarProjeto(
+    "Aplicação de Caixa de Hamburgueria",
+    ["Python", "Tkinter", "Sqlite", "Paint"],
+    "VsCode, GitHub, pip, PyInstaller...",
+    "Aplicação desktop para gerenciamento de caixa de hamburgueria, com cadastro de pedidos e histórico de vendas.",
+    ["Minha falta de conhecimento", "Os perdidos de Responsividade", "Organização do Front-End"]
+  )
 ];
 
-const container = document.getElementById("listaProjetos"); // Pega o container no HTML onde os projetos vão ser exibidos
-
-for (let i = 0; i < projetos.length; i++) {  // Percorre todos os projetos do array, e para cada projeto, cria um bloco de HTML com as informações do projeto e injeta no container
-  const projeto = projetos[i]; // ⚠️ Era "projetos" igual ao array — nome trocado para "projeto" para representar o item atual do loop
-
-  // Cria um bloco de HTML para exibir as informações do projeto, usando template literals para inserir os dados dinamicamente
-  container.innerHTML += `
-    <div class="projeto"> 
+// ─── Função que gera o HTML de um projeto ────────────────────────────────
+function criarCardProjeto(projeto) {     // Recebe um objeto projeto e devolve o HTML dele
+  return `
+    <div class="projeto">
       <h2>${projeto.nome}</h2>
       <p><strong>Descrição:</strong> ${projeto.descricao}</p>
       <p><strong>Tecnologias:</strong> ${projeto.tecnologias.join(", ")}</p>
@@ -262,7 +329,55 @@ for (let i = 0; i < projetos.length; i++) {  // Percorre todos os projetos do ar
     </div>
   `;
 }
+
+// ─── Função que exibe todos os projetos no site ───────────────────────────
+function exibirProjetos() {     // Percorre o array e injeta o HTML de cada projeto no container
+  const container = document.getElementById("listaProjetos");     // Pega o container no HTML
+
+  for (let i = 0; i < projetos.length; i++) {     // Percorre todos os projetos do array
+    container.innerHTML += criarCardProjeto(projetos[i]);     // Gera e injeta o HTML de cada projeto
+  }
+}
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//================================ Funções =============================================
+
+// ✅ Corrigido — exibe o relatório de tipos usando os dados do objeto perfil
+criarRelatorioTipos({
+  nome:               perfil.nome,     // Tipo do nome
+  tituloProfissional: perfil.tituloProfissional,     // Tipo do título profissional
+  bio:                perfil.bio,     // Tipo da biografia
+  anoFormatura:       perfil.anoFormatura     // Tipo do ano de formatura
+});
+
+// Exibe as informações pessoais na página
+exibirInformacoesPessoais(perfil.nome, perfil.tituloProfissional, perfil.bio);
+
+// Exibe o tempo restante para a formatura
+exibirFormatura();
+
+// Exibe o dia da semana
+exibirDiaSemana();
+
+// Alterna entre modo claro e escuro quando o botão for clicado
+botao.addEventListener("click", function() {     // Quando o botão for clicado...
+  aplicarModo();     // ...chama a função que aplica o modo correto
+});
+
+// Faz o Quiz aparecer na tela
+mostrarPergunta();
+
+// Faz as Habilidades aparecerem na tela
+exibirHabilidades();
+
+// Faz os Projetos aparecerem na tela
+exibirProjetos();
+
+
+
+
+
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //======== Estruturas de Controle (Condicionais e Loops) =============    
@@ -338,5 +453,18 @@ console.log(frutas); // Exibe o array atualizado no console (Nactarina, Pera, Ma
 
 frutas.splice(3, 2); // Remove 2 itens a partir do índice 3 (Melancia e Uva)
 console.log(frutas); // Exibe o array atualizado no console (Nactarina, Pera, Maçã, Cereja)
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//======== Aula (15/05/2026) de Funções =============
+//Calculo de IMC usando funções aninhadas (função que retorna outra função)
+
+function meuPeso(peso) {
+    return function (altura) {
+        return peso / (altura ** 2);
+    }
+}
+
+// Calculando com seus dados: 82kg e 1.75m
+let valorIMC = meuPeso(82)(1.75);
 */
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
