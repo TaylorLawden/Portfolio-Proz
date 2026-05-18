@@ -310,7 +310,7 @@ let projetos = [     // Array que guarda todos os projetos criados
     ["Python", "Tkinter", "Sqlite", "Paint"],
     "VsCode, GitHub, pip, PyInstaller...",
     "Aplicação desktop para gerenciamento de caixa de hamburgueria, com cadastro de pedidos e histórico de vendas.",
-    ["Minha falta de conhecimento", "Os perdidos de Responsividade", "Organização do Front-End"]
+    ["Minha falta de conhecimento", "Os pedidos de Responsividade", "Organização do Front-End"]
   )
 ];
 
@@ -341,9 +341,55 @@ function exibirProjetos() {     // Percorre o array e injeta o HTML de cada proj
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+// ========= Contato por E-mail =============
+
+// ─── Função que VALIDA se o e-mail tem o formato correto ─────────────────
+function validarEmail(email) {     // Recebe o e-mail digitado e verifica se é válido
+  const formato = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;     // Expressão regular que verifica o formato nome@dominio.extensao
+  return formato.test(email);     // Retorna true se for válido, false se não for
+}
+
+// ─── Função que ABRE o e-mail automaticamente ────────────────────────────
+function abrirEmail(emailUsuario) {     // Recebe o e-mail do usuário para colocar no campo "reply-to"
+  const destinatario = "luizfernandesdn1@gmail.com";     // E-mail do portfólio
+  const assunto      = encodeURIComponent("Avaliação do Portifólio - Site");     // Assunto já preenchido (encodeURIComponent evita erros com espaços e acentos)
+  const corpo        = encodeURIComponent(`Olá Luiz! Eu vim avaliar o seu portfólio!\n\n<b>Minha avaliação:`);     // Corpo inicial do e-mail. O usuário pode completar depois (encodeURIComponent para evitar erros)
+
+  window.location.href = `mailto:${destinatario}?subject=${assunto}&body=${corpo}`;     // Abre o aplicativo de e-mail do usuário com tudo preenchido
+}
+
+// ─── Função que VALIDA e dispara o envio do e-mail ───────────────────────
+function enviarAvaliacaoEmail() {     // Chamada quando o usuário clica no botão
+  const input    = document.getElementById("inputEmail");     // Pega o campo de e-mail
+  const mensagem = document.getElementById("mensagemEmail");  // Pega o elemento de mensagem
+  const email    = input.value.trim();                        // Pega o valor digitado e remove espaços extras
+
+  if (email === "") {     // Se o campo estiver vazio...
+    mensagem.textContent            = "⚠️ Por favor, digite seu e-mail antes de enviar.";     // Mensagem de campo vazio
+    mensagem.style.backgroundColor  = "#fff3cd";
+    mensagem.style.color            = "#856404";
+    return;     // Para a função aqui
+  }
+
+  if (!validarEmail(email)) {     // Se o e-mail não tiver o formato correto...
+    mensagem.textContent            = "❌ E-mail inválido! Verifique se digitou corretamente (ex: nome@email.com).";     // Mensagem de e-mail inválido
+    mensagem.style.backgroundColor  = "#fde8e8";
+    mensagem.style.color            = "#842029";
+    return;     // Para a função aqui
+  }
+
+  mensagem.textContent            = "✅ E-mail válido! Abrindo seu aplicativo de e-mail...";     // Mensagem de sucesso
+  mensagem.style.backgroundColor  = "#e8f8f0";
+  mensagem.style.color            = "#155724";
+
+  abrirEmail(email);     // Chama a função que abre o aplicativo de e-mail com tudo preenchido
+}
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 //================================ Funções =============================================
 
-// ✅ Corrigido — exibe o relatório de tipos usando os dados do objeto perfil
+// Exibe o relatório de tipos usando os dados do objeto perfil
 criarRelatorioTipos({
   nome:               perfil.nome,     // Tipo do nome
   tituloProfissional: perfil.tituloProfissional,     // Tipo do título profissional
@@ -374,7 +420,10 @@ exibirHabilidades();
 // Faz os Projetos aparecerem na tela
 exibirProjetos();
 
-
+// ─── Evento do Botão de Enviar Avaliação por E-mail ──────────────────────────────────────────────────────
+document.getElementById("btnEnviarEmail").addEventListener("click", function() {     // Quando o botão for clicado...
+  enviarAvaliacaoEmail();     // ...chama a função que valida e abre o e-mail
+});
 
 
 

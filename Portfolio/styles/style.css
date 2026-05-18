@@ -6,3 +6,41 @@
     background-attachment: fixed;
 
 }
+
+/* ========= Estilização do título "Meus Projetos" =========== */
+
+/* Título dos projetos */
+#meusProjetos {
+  text-align: center;      /* Centraliza o título */
+  margin-bottom: 20px;     /* Espaço entre o título e os cards */
+}
+
+/* Container que segura todos os projetos */
+#listaProjetos {
+  display: grid;                          /* Ativa o grid */
+  grid-template-columns: repeat(2, 1fr); /* 2 colunas de tamanho igual */
+  gap: 20px;                              /* Espaço entre os cards */
+}
+
+/* Cada card de projeto */
+.projeto {
+  padding: 16px;              /* Espaçamento interno do card */
+  border: 1px solid #ccc;    /* Borda ao redor do card */
+  border-radius: 8px;        /* Arredonda os cantos */
+}
+
+/* Estilização dos itens da lista dentro do card */
+.projeto li::marker {       /* Estilizando a distância do marker */
+  font-size: 1rem;       /* Mantém o tamanho padrão do marker | 1 rem é igual a 16px */
+}
+
+/* Ajuste para reduzir o espaço entre o marker e o texto */
+.projeto ul {
+  padding-left: 18px;   /* Reduz o espaço entre o marker e a borda do card */
+  margin: 0;            /* Remove a margem padrão do navegador */
+  list-style-position: inside;   /* ← Essa é a correção! Puxa o marker para dentro do texto */
+}
+.projeto li {
+  padding-left: 0;      /* Garante que não há espaço extra antes do texto */
+  margin-bottom: 4px;   /* Espaço entre cada item da lista */
+}
