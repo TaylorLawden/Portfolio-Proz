@@ -1,46 +1,155 @@
-#titulo1 {
-    background-image: url('/Portfolio/imagens/céu_Estrelado_Site.png');
-    background-size: 100% 103px;
-    background-position: top left;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
+/* ========= Botão de Modo Claro/Escuro fixo no canto superior direito =========== */
+#modoClaro\/Escuro {
+    position: fixed;       /* Fica fixo na tela mesmo ao scrollar */
+    top: 16px;             /* Distância do topo */
+    right: 16px;           /* Distância da direita */
+    z-index: 1000;         /* Fica sempre na frente de tudo */
+    padding: 8px 16px;     /* Espaçamento interno do botão */
+    cursor: pointer;       /* Cursor de mãozinha ao passar por cima */
+    border-radius: 8px;    /* Arredonda os cantos */
+    border: 1px solid #cccccc19;   /* Borda do botão */
 }
 
-/* ========= Estilização do título "Meus Projetos" =========== */
+/* ========= Cada seção ocupa a tela inteira =========== */
+main,
+#titulo2,
+#quiz,
+#meusProjetos,
+#areaContato {
+    min-height: 100vh;        /* Cada seção ocupa 100% da altura da tela */
+    width: 100%;              /* Ocupa 100% da largura da tela */
+    box-sizing: border-box;   /* Garante que o padding não estoure a tela */
+    overflow: hidden;         /* Esconde o conteúdo que ultrapassar a seção */
+    display: flex;            /* Ativa o flex para centralizar o conteúdo */
+    flex-direction: column;   /* Empilha o conteúdo verticalmente */
+    justify-content: center;  /* Centraliza o conteúdo verticalmente */
+    align-items: center;      /* Centraliza o conteúdo horizontalmente */
+}
+
+/* ========= Impede o scroll padrão do navegador =========== */
+html, body {
+    overflow: hidden;         /* Remove a barra de scroll padrão */
+    height: 100%;             /* Garante que o body ocupe a tela inteira */
+    margin: 0;                /* Remove a margem padrão do navegador */
+    padding: 0;               /* Remove o padding padrão do navegador */
+}
+
+/* ========= Fundo das seções =========== */
+
+/* Seção 1 — Apresentação (sua foto) */
+main {
+    background-image: url('/Portfolio/imagens/foto_Do_Luiz.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Seção 2 — Habilidades (sua foto) */
+#titulo2 {
+    background-image: url('/Portfolio/imagens/foto_Do_Luiz.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Seção 3 — Projetos (quadro branco) */
+#meusProjetos {
+    background-image: url('/Portfolio/imagens/foto_Quadro_Branco.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Seção 4 — Quiz (universo) */
+#quiz {
+    background-image: url('/Portfolio/imagens/foto_Do_Universo.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Seção 5 — Contato (e-mail) */
+#areaContato {
+    background-image: url('/Portfolio/imagens/email_desenho.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* ========= Estilização dos cards de projeto =========== */
 
 /* Título dos projetos */
 #meusProjetos {
-  text-align: center;      /* Centraliza o título */
-  margin-bottom: 20px;     /* Espaço entre o título e os cards */
+    text-align: center;      /* Centraliza o título */
+    margin-bottom: 20px;     /* Espaço entre o título e os cards */
 }
 
 /* Container que segura todos os projetos */
 #listaProjetos {
-  display: grid;                          /* Ativa o grid */
-  grid-template-columns: repeat(2, 1fr); /* 2 colunas de tamanho igual */
-  gap: 20px;                              /* Espaço entre os cards */
+    display: grid;                          /* Ativa o grid */
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas de tamanho igual */
+    gap: 20px;                              /* Espaço entre os cards */
 }
 
 /* Cada card de projeto */
 .projeto {
-  padding: 16px;              /* Espaçamento interno do card */
-  border: 1px solid #ccc;    /* Borda ao redor do card */
-  border-radius: 8px;        /* Arredonda os cantos */
+    padding: 16px;              /* Espaçamento interno do card */
+    border: 1px solid #ccc;    /* Borda ao redor do card */
+    border-radius: 8px;        /* Arredonda os cantos */
+    background-color: rgba(255, 255, 255, 0.85);   /* Fundo branco semi-transparente para legibilidade */
 }
 
-/* Estilização dos itens da lista dentro do card */
-.projeto li::marker {       /* Estilizando a distância do marker */
-  font-size: 1rem;       /* Mantém o tamanho padrão do marker | 1 rem é igual a 16px */
-}
-
-/* Ajuste para reduzir o espaço entre o marker e o texto */
+/* Lista do "O que tive que aguentar" */
 .projeto ul {
-  padding-left: 18px;   /* Reduz o espaço entre o marker e a borda do card */
-  margin: 0;            /* Remove a margem padrão do navegador */
-  list-style-position: inside;   /* ← Essa é a correção! Puxa o marker para dentro do texto */
+    padding-left: 18px;          /* Reduz o espaço entre o marker e a borda do card */
+    margin: 0;                   /* Remove a margem padrão do navegador */
+    list-style-position: inside; /* Puxa o marker para dentro do texto */
 }
+
 .projeto li {
-  padding-left: 0;      /* Garante que não há espaço extra antes do texto */
-  margin-bottom: 4px;   /* Espaço entre cada item da lista */
+    padding-left: 0;      /* Garante que não há espaço extra antes do texto */
+    margin-bottom: 4px;   /* Espaço entre cada item da lista */
+}
+
+/* ========= Seção de Frases de Pensadores =========== */
+#areaFrases {
+    background-image: url('/Portfolio/imagens/foto_Do_Universo.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Card de cada frase */
+.frase-card {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-left: 4px solid #4f46e5;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.frase-card p {
+    margin: 0 0 6px;
+    font-style: italic;
+}
+
+.frase-card span {
+    font-size: 0.85rem;
+    color: #636060;
+}
+
+#listaFrases {
+    max-height: 50vh;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#statusFrases {
+    font-size: 0.9rem;
+    color: #3c0202;
+    margin: 8px 0;
 }
