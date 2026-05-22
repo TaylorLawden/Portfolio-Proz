@@ -1,7 +1,34 @@
-// ================= API das Frases de Filosófos ====================
+// ======== Modo claro e escuro ========
+
+const botao = document.getElementById("modoClaro/Escuro");     // Pega o botão no HTML pelo seu ID
+
+let claro = true;     // Variável que controla qual modo está ativo no momento (começa no modo claro)
+
+// ─── Função que CRIA o objeto com as configurações de cada modo ───────────
+function criarModo(corFundo, corTexto, textoBotao) {     // Recebe as 3 configurações do modo como parâmetros
+  return {     // Devolve um objeto com os dados organizados
+    corFundo:   corFundo,    // Cor de fundo da página
+    corTexto:   corTexto,    // Cor do texto da página
+    textoBotao: textoBotao   // Texto que o botão vai exibir
+  };
+}
+
+// ─── Função que aplica o modo na página ──────────────────────────────────
+function aplicarModo() {     // Chamada sempre que o botão for clicado
+  const modo = claro
+    ? criarModo("black", "blue", "Modo Claro")   // Modo escuro: fundo preto, texto branco
+    : criarModo("white", "black", "Modo Escuro"); // Modo claro: fundo cinza, texto preto
+
+  document.body.style.backgroundColor = modo.corFundo;    // Aplica a cor de fundo na página
+  document.body.style.color           = modo.corTexto;    // Aplica a cor do texto na página
+  botao.textContent                   = modo.textoBotao;  // Atualiza o texto do botão
+
+  claro = !claro;     // Inverte o estado: se era true vira false, se era false vira true
+}
+// --------------------------------------------------------------------------------------------------------------------------------------
 
 
-// ─── Data atual ───────────────────────────────────────────────────────────
+// ============== Data atual =====================
 const hoje     = new Date();          // Pega a data atual
 const anoAtual = hoje.getFullYear();  // Extrai o ano atual
 const mesAtual = hoje.getMonth() + 1; // Extrai o mês atual (começa do 0, por isso soma 1)
@@ -120,33 +147,40 @@ function exibirDiaSemana() {     // Chamada para mostrar o dia atual na página
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-// ======== Modo claro e escuro ========
+// ========= Efeito que hover nos balões da imagem Pokémon =========
 
-const botao = document.getElementById("modoClaro/Escuro");     // Pega o botão no HTML pelo seu ID
+function ativarHoverPokemon() {
+    const areas   = document.querySelectorAll(".area-habilidade");  // Pega todas as áreas do mapa
+    const img     = document.getElementById("imgPokemon");          // Pega a imagem
+    const tooltip = document.getElementById("tooltipHabilidade");   // Pega o tooltip
 
-let claro = true;     // Variável que controla qual modo está ativo no momento (começa no modo claro)
+    areas.forEach(function(area) {
 
-// ─── Função que CRIA o objeto com as configurações de cada modo ───────────
-function criarModo(corFundo, corTexto, textoBotao) {     // Recebe as 3 configurações do modo como parâmetros
-  return {     // Devolve um objeto com os dados organizados
-    corFundo:   corFundo,    // Cor de fundo da página
-    corTexto:   corTexto,    // Cor do texto da página
-    textoBotao: textoBotao   // Texto que o botão vai exibir
-  };
+        // Quando o mouse entra na área...
+        area.addEventListener("mouseenter", function(e) {
+            img.classList.add("hover-ativo");                        // Aplica o zoom na imagem
+            tooltip.textContent = area.dataset.habilidade;          // Coloca o nome da habilidade no tooltip
+            tooltip.style.opacity = "1";                            // Mostra o tooltip
+        });
+
+        // Quando o mouse se move, o tooltip segue o cursor
+        area.addEventListener("mousemove", function(e) {
+            const rect   = img.getBoundingClientRect();              // Posição da imagem na tela
+            const x      = e.clientX - rect.left + 10;              // X relativo à imagem
+            const y      = e.clientY - rect.top  - 30;              // Y relativo à imagem
+            tooltip.style.left = x + "px";
+            tooltip.style.top  = y + "px";
+        });
+
+        // Quando o mouse sai da área...
+        area.addEventListener("mouseleave", function() {
+            img.classList.remove("hover-ativo");                     // Remove o zoom
+            tooltip.style.opacity = "0";                            // Esconde o tooltip
+        });
+    });
 }
 
-// ─── Função que aplica o modo na página ──────────────────────────────────
-function aplicarModo() {     // Chamada sempre que o botão for clicado
-  const modo = claro
-    ? criarModo("black", "blue", "Modo Claro")   // Modo escuro: fundo preto, texto branco
-    : criarModo("white", "black", "Modo Escuro"); // Modo claro: fundo cinza, texto preto
 
-  document.body.style.backgroundColor = modo.corFundo;    // Aplica a cor de fundo na página
-  document.body.style.color           = modo.corTexto;    // Aplica a cor do texto na página
-  botao.textContent                   = modo.textoBotao;  // Atualiza o texto do botão
-
-  claro = !claro;     // Inverte o estado: se era true vira false, se era false vira true
-}
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -510,37 +544,39 @@ criarRelatorioTipos({
   anoFormatura:       perfil.anoFormatura
 });
 
-// Exibe as informações pessoais na página
+// Funlão que exibe as informações pessoais na página
 exibirInformacoesPessoais(perfil.nome, perfil.tituloProfissional, perfil.bio);
 
-// Exibe o tempo restante para a formatura
+// Função que exibe o tempo restante para a formatura
 exibirFormatura();
 
-// Exibe o dia da semana
+// Função que exibe o dia da semana
 exibirDiaSemana();
 
-// Alterna entre modo claro e escuro quando o botão for clicado
+// Função que alterna entre modo claro e escuro quando o botão for clicado
 botao.addEventListener("click", function() {
   aplicarModo();
 });
 
-// Faz o Quiz aparecer na tela
+// Função que faz o Quiz aparecer na tela
 mostrarPergunta();
 
-// Faz as Habilidades aparecerem na tela
-exibirHabilidades();
+// Função que faz as Habilidades aparecerem na tela
+// exibirHabilidades();  
 
-// Faz os Projetos aparecerem na tela
+// Função que faz os Projetos aparecerem na tela
 exibirProjetos();
 
-// Ativa o scroll de seção em seção
+// Função que ativa o scroll de seção em seção
 ativarScrollPorSecao();
 
-// Evento do botão de enviar e-mail
+// Função que chama a função de enviar e-mail quando o botão é clicado
 document.getElementById("btnEnviarEmail").addEventListener("click", function() {
   enviarAvaliacaoEmail();
 });
 
+// Função que ativa o hover nos balões da imagem Pokémon
+ativarHoverPokemon();
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //======== Estruturas de Controle (Condicionais e Loops) =============    
