@@ -1,0 +1,296 @@
+/* ========= Botão de Modo Claro/Escuro fixo no canto superior direito =========== */
+#modoClaro\/Escuro {
+    position: fixed;       /* Fica fixo na tela mesmo ao scrollar */
+    top: 16px;             /* Distância do topo */
+    right: 16px;           /* Distância da direita */
+    z-index: 1000;         /* Fica sempre na frente de tudo */
+    padding: 8px 16px;     /* Espaçamento interno do botão */
+    cursor: pointer;       /* Cursor de mãozinha ao passar por cima */
+    border-radius: 8px;    /* Arredonda os cantos */
+    border: 1px solid #cccccc19;   /* Borda do botão */
+}
+/* Modo escuro — texto dos balões fica azul */
+body[style*="background-color: black"] .balao-habilidade,
+body[style*="background-color: black"] #tituloHabilidades {
+    color: blue;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+
+/* ========= Cada seção ocupa a tela inteira =========== */
+main,
+#quiz,
+#meusProjetos,
+#areaContato {
+    min-height: 100vh;        /* Cada seção ocupa 100% da altura da tela */
+    width: 100%;              /* Ocupa 100% da largura da tela */
+    box-sizing: border-box;   /* Garante que o padding não estoure a tela */
+    overflow: hidden;         /* Esconde o conteúdo que ultrapassar a seção */
+    display: flex;            /* Ativa o flex para centralizar o conteúdo */
+    flex-direction: column;   /* Empilha o conteúdo verticalmente */
+    justify-content: center;  /* Centraliza o conteúdo verticalmente */
+    align-items: center;      /* Centraliza o conteúdo horizontalmente */
+}
+
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+
+/* ========= Impede o scroll padrão do navegador =========== */
+html, body {
+    overflow: hidden;         /* Remove a barra de scroll padrão */
+    height: 100%;             /* Garante que o body ocupe a tela inteira */
+    margin: 0;                /* Remove a margem padrão do navegador */
+    padding: 0;               /* Remove o padding padrão do navegador */
+}
+
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+
+/* ========= Fundo das seções =========== */
+/* Seção 1 — Apresentação (sua foto) */
+main {
+    background-image: url('/docs/foto_Do_Luiz.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}    
+#minhaBio {
+    padding: 20px 80px;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+/* Seção 2 — Habilidades */
+#titulo2 {
+    background-image: none;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#imgFundoPokemon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    z-index: 0;
+}
+
+#pokemonWrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+}
+
+#tituloHabilidades {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.balao-habilidade {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;      /* ← aumentei o tamanho */
+    text-align: center;     /* ← centraliza o texto */
+    color: #222;
+    border-radius: 20px;
+    cursor: default;
+    transition: transform 0.2s ease;
+    height: 8%;
+}
+
+.balao-habilidade:hover {
+    transform: scale(1.12);
+}
+
+#balaoHtml {
+    left: 16%;
+    top: 77%;
+    width: 27%;
+}
+
+#balaoPrompt {
+    left: 44%;
+    top: 77%;
+    width: 27%;
+}
+
+#balaoDesign {
+    left: 16%;
+    top: 88%;
+    width: 27%;
+}
+
+#balaoJs {
+    left: 44%;
+    top: 88%;
+    width: 27%;
+}
+/* ----------------------------------------------------------------------------------------------------------------
+
+/* Seção 3 — Projetos (quadro branco) */
+#meusProjetos {
+    background-image: url('/docs/foto_Quadro_Branco.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Seção 4 — Quiz (universo) */
+#quiz {
+    background-image: url('/docs/foto_Do_Universo.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Seção 5 — Contato (e-mail) */
+#areaContato {
+    background-image: url('/docs/email_Desenho.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* ========= Estilização dos cards de projeto =========== */
+
+/* Título dos projetos */
+#meusProjetos {
+    text-align: center;      /* Centraliza o título */
+    margin-bottom: 20px;     /* Espaço entre o título e os cards */
+}
+
+/* Container que segura todos os projetos */
+#listaProjetos {
+    display: grid;                          /* Ativa o grid */
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas de tamanho igual */
+    gap: 20px;                              /* Espaço entre os cards */
+}
+
+/* Cada card de projeto */
+.projeto {
+    padding: 16px;              /* Espaçamento interno do card */
+    border: 1px solid #ccc;    /* Borda ao redor do card */
+    border-radius: 8px;        /* Arredonda os cantos */
+    background-color: rgba(255, 255, 255, 0.85);   /* Fundo branco semi-transparente para legibilidade */
+}
+
+/* Lista do "O que tive que aguentar" */
+.projeto ul {
+    padding-left: 18px;          /* Reduz o espaço entre o marker e a borda do card */
+    margin: 0;                   /* Remove a margem padrão do navegador */
+    list-style-position: inside; /* Puxa o marker para dentro do texto */
+}
+
+.projeto li {
+    padding-left: 0;      /* Garante que não há espaço extra antes do texto */
+    margin-bottom: 4px;   /* Espaço entre cada item da lista */
+}
+
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+
+/* ========= Seção de Frases de Pensadores =========== */
+#areaFrases {
+    background-image: url('/docs/foto_Do_Universo.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Card de cada frase */
+.frase-card {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-left: 4px solid #4f46e5;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.frase-card p {
+    margin: 0 0 6px;
+    font-style: italic;
+}
+
+.frase-card span {
+    font-size: 0.85rem;
+    color: #636060;
+}
+
+#listaFrases {
+    max-height: 50vh;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#statusFrases {
+    font-size: 0.9rem;
+    color: #3c0202;
+    margin: 8px 0;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+
+/* ========= Imagem Pokémon de Habilidades =========== */
+.pokemon-container {
+    position: relative;
+    display: inline-block;
+}
+
+#imgPokemon {
+    width: 500px;          /* Ajuste o tamanho conforme quiser */
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+/* Tooltip que aparece ao passar o mouse */
+#tooltipHabilidade {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    pointer-events: none;       /* Não interfere no mouse */
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* Efeito de zoom na imagem ao passar sobre um balão */
+#imgPokemon.hover-ativo {
+    transform: scale(1.04);
+}
