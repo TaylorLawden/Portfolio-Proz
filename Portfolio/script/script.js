@@ -348,55 +348,55 @@ function criarCardFrase(texto, autor) {     // Recebe o texto e o autor da frase
     return card;     // Devolve o card pronto
 }
 
-async function buscarFrases() {
-    const input  = document.getElementById("inputFrase");
-    const status = document.getElementById("statusFrases");
-    const lista  = document.getElementById("listaFrases");
-    const termo  = input.value.trim().toLowerCase();
+async function buscarFrases() {        // Função assíncrona para buscar as frases da API e exibir na página
+    const input  = document.getElementById("inputFrase");       // Pega o campo de input onde o usuário digita o termo de busca
+    const status = document.getElementById("statusFrases");       // Pega o elemento onde serão exibidas mensagens de status (buscando, erros, etc)
+    const lista  = document.getElementById("listaFrases");       // Pega o container onde os cards de frases serão exibidos
+    const termo  = input.value.trim().toLowerCase();         // Pega o termo digitado, remove espaços extras e converte para minúsculas
 
-    if (termo === "") {
-        status.textContent = "⚠️ Digite um nome ou tema antes de buscar.";
+    if (termo === "") {        // Se o campo de busca estiver vazio...
+        status.textContent = "⚠️ Digite um nome ou tema antes de buscar.";      // Exibe uma mensagem de aviso e não faz a busca
         return;
     }
 
-    status.textContent = "🔍 Buscando frases...";
+    status.textContent = "🔍 Buscando frases...";       
     lista.innerHTML    = "";
 
     try {
-        // Busca todas as 100 frases (limite máximo da API)
-        const resposta = await fetch("https://dummyjson.com/quotes?limit=100");
-        const dados    = await resposta.json();
+        // Busca todas as 100 frases (limite máximo da API)       // OBS: A API não suporta busca por termo, então buscamos tudo e filtramos localmente
+        const resposta = await fetch("https://dummyjson.com/quotes?limit=100");       // Faz a requisição para a API e espera a resposta
+        const dados    = await resposta.json();        // Converte a resposta para JSON e espera o resultado
 
         // Filtra localmente pelo termo digitado (autor ou trecho da frase)
-        const encontradas = dados.quotes.filter(function(frase) {
-            return frase.author.toLowerCase().includes(termo) ||
-                   frase.quote.toLowerCase().includes(termo);
+        const encontradas = dados.quotes.filter(function(frase) {         // Para cada frase, verifica se o autor ou o texto da frase contém o termo de busca
+            return frase.author.toLowerCase().includes(termo) ||         // Verifica se o nome do autor contém o termo (ignorando maiúsculas/minúsculas). O includes retorna true se o termo for encontrado, ou false se não for encontrado. Os símbolos || servem para dizer "ou", ou seja, basta que o termo esteja presente no autor ou na frase para ser considerada uma correspondência.
+                   frase.quote.toLowerCase().includes(termo);           // Verifica se o texto da frase contém o termo (ignorando maiúsculas/minúsculas)
         });
 
         if (encontradas.length === 0) {
-            status.textContent = "❌ Nenhuma frase encontrada. Tente: Einstein, life, success, mind...";
+            status.textContent = "❌ Nenhuma frase encontrada. Tente: Einstein, life, success, mind...";        // Se nenhuma frase for encontrada, exibe uma mensagem de erro e sugestões de termos para buscar
             return;
         }
 
-        status.textContent = `✅ ${encontradas.length} frase(s) encontrada(s) para "${termo}"`;
+        status.textContent = `✅ ${encontradas.length} frase(s) encontrada(s) para "${termo}"`;             // Se frases forem encontradas, exibe a quantidade encontrada e o termo buscado
 
-        encontradas.forEach(function(frase) {
-            const card = criarCardFrase(frase.quote, frase.author);
-            lista.appendChild(card);
+        encontradas.forEach(function(frase) {          // Para cada frase encontrada, cria um card e adiciona na página
+            const card = criarCardFrase(frase.quote, frase.author);          // Cria o card usando a função que criamos, passando o texto e o autor da frase
+            lista.appendChild(card);        // Adiciona o card criado dentro do container de lista no HTML
         });
 
-    } catch (erro) {
+    } catch (erro) {         // Se ocorrer algum erro durante a requisição ou processamento dos dados, exibe uma mensagem de erro e loga o erro no console para depuração
         status.textContent = "❌ Erro ao buscar frases. Verifique sua conexão.";
         console.error(erro);
     }
 }
 
 // ─── Eventos da seção de frases ───────────────────────────────────────────
-document.getElementById("btnBuscarFrase").addEventListener("click", function() {
+document.getElementById("btnBuscarFrase").addEventListener("click", function() {        // Escuta o evento de clique no botão de busca
     buscarFrases();     // Busca ao clicar no botão
 });
 
-document.getElementById("inputFrase").addEventListener("keydown", function(e) {
+document.getElementById("inputFrase").addEventListener("keydown", function(e) {         // Escuta o evento de tecla pressionada no campo de busca
     if (e.key === "Enter") buscarFrases();     // Busca ao pressionar Enter
 });
 
