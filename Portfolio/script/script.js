@@ -62,7 +62,7 @@ function exibirInformacoesPessoais(nome, titulo, bio) {     // Recebe o nome, t�
 const perfil = criarPerfil(     // Chama a função passando todos os dados e guarda o objeto retornado
   "Luiz Fernandes",
   "Desenvolvedor de Sistemas / Faço de Tudo",
-  "Sou um desenvolvedor em processo de aprendizado. Estou cursando atualmente o curso de Desenvolvimento de Sistemas na instituição Proz Educação",
+  "Sou um desenvolvedor em processo de aprendizado, por mais que todo desenvolvedor sempre estará em processo de aprendizado, devido a evolução contínua da tecnologia. A minha meta como desenvolvedor é criar coisas que realmente ajudem, divirta ou seja util para as pessoas, seja um site, um aplicativo, um jogo ou qualquer outra solução que possa fazer a vida das pessoas mais fácil ou mais divertida. Estou sempre disposto a tentar algo novo, mesmo não sabendo ao certo se vai dar certo ou se serei capaz de realizar, pois é melhor morrer sabendo que tentou, do que morre sem ter nem tentado.",
   2026, "12", "31",     // Ano, mês e dia de formatura
   2025, "2",  "12"      // Ano, mês e dia de ingresso
 );
@@ -221,6 +221,41 @@ const perguntas = [     // Array que guarda todos os objetos de pergunta
     "O que mais te interessa?",
     "🎉 Aproveitar o momento e criar memórias.",
     "🔍 Entender como as coisas funcionam de verdade."
+  ), 
+  criarPergunta(
+    "Quando você entra em um lugar novo, o que chama mais sua atenção?",
+    "👀 O quanto aquele lugar é divertido e como você se sente ali.",
+    "🧠 As pequenas atitudes das pessoas e como elas interagem entre si."
+  ),
+  criarPergunta(
+    "Em uma conversa, você costuma…",
+    "💬 Entrar no clima, rir, sentir a energia e viver o momento.",
+    "🧐 Pensar nas implicações e consequências das palavras que você diz, e como isso pode afetar os outros. Semprepensando em dar a melhor resposta possível."
+  ), 
+  criarPergunta(
+    "Qual dessas frases parece mais com você?",
+    "😊 Nem tudo precisa fazer sentido para valer a pena.",
+    "😟 Às vezes entender demais tira a leveza das coisas."
+  ),
+  criarPergunta(
+    "Quando alguém te conta um problema, você tende a…",
+    "😤 Tentar fazer a pessoa se sentir melhor naquele momento.",
+    "🤔 Tentar entender a raiz do problema e analisar a situação, afim de entregar uma solução definitiva."
+  ),
+  criarPergunta(
+    "Quando você vê uma paisagem bonita, qual é sua reação mais natural?",
+    "😍 Parar por um momento e simplesmente sentir a sensação que aquele lugar te proporciona.",
+    "🧐 Pensar em como aquele lugar faz você refletir sobre a vida, o tempo ou memórias do passado."
+  ),
+  criarPergunta(
+    "Quando alguém faz algo estranho, você tende a…",
+    "🫤 Não pensar muito sobre isso e seguir normalmente.",
+    "🤔 Ficar tentando entender o motivo daquela atitude."
+  ),
+  criarPergunta(
+    "Quando você lembra do passado, o que mais pesa?",
+    "😔 A saudade dos momentos que te fizeram sentir vivo e se divertir.",
+    "😔 As reflexões e significados que você tirou daquilo tudo que você viveu, das pessoas que conheceu e das experiências que te moldaram."
   )
 ];
 
@@ -578,92 +613,4 @@ document.getElementById("btnEnviarEmail").addEventListener("click", function() {
 // Função que ativa o hover nos balões da imagem Pokémon
 ativarHoverPokemon();
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//======== Estruturas de Controle (Condicionais e Loops) =============    
-/*Gatilho inicial/começo*/ /*limite, limitador, roda enquanto*/ /*Incremento e decremento  
-for (let i = 0; i <= 20;i++) {
-  let pares = (i % 2 === 0) ? "Par" : "Ímpar";
-  console.log(`${i} é ${pares}`);
-}
-
-let object = {
-  nome: "Luiz",
-  idade: 18,
-  profissao: "Desenvolvedor de Sistemas",
-}
-for (let chave in object) {
-  document.write(`<p>${chave}: ${object[chave]}</p>`);
-}
-
-
-let alunos = ["Malacy", "Isaac", "Geovana", "Anderson", "Gustavo"];
-for(let contem of alunos) {
-if (contem === "Anderson") {
-  document.write(`<p>${contem} - Presente! </p>`);
-} else {
-  document.write(`<p> ${contem} - Ausente! </p>`);
-  }
-}
-
-
-let num = prompt("Prompt 1 - Diga um número par:")
-while (num % 2 !== 0) {
-  num = prompt("Ops, esse número não é par! Tente novamente:");
-};
-
-do {
-  num = prompt ("Prompt 2 - Diga um número par:");
-} while (num % 2 !== 0);
-*/
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-// =========== Aula (12/05/2026) de Arrays e Objetos ===========
-/*debugger; // Serve para pausar a execução do código nesse ponto, permitindo que você inspecione variáveis e o fluxo do programa no console do navegador. É uma ferramenta útil para encontrar e corrigir erros no código.
-'use strict'; // Ativa o modo estrito, que ajuda a identificar erros comuns e a escrever um código mais seguro. Por exemplo, ele impede o uso de variáveis não declaradas, o que pode evitar muitos bugs.
-document.write("<p>Olá, mundo!</p>"); 
-
-let frutas = ["Maçã", "Banana", "Laranja"];
-
-frutas.pop(); // Remove o último item do array (Laranja)
-
-frutas.push("Uva", "Cereja"); // Adiciona novos itens ao final do array (Uva, Cereja)
-
-frutas.unshift("Abacaxi", "Nactarina"); // Adiciona um item no início do array (Abacaxi e Nactarina)
-
-frutas.shift(); // Remove o primeiro item do array (Abacaxi)
-
-console.log(frutas); // Exibe o array atualizado no console (Nactarina, Maçã, Banana, Uva, Cereja)
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-console.log(frutas.indexOf("Banana")); // Retorna o índice do item "Banana" no array (2)
-console.log(frutas.includes("Kiwi")); // Verifica se o item "Kiwi" está presente no array (false)
-console.log(frutas.length); // Retorna o número de itens no array (5)
-
-frutas.forEach(function(fruta) {
-  console.log(fruta); // Exibe cada fruta do array no console (Nactarina, Maçã, Banana, Uva, Cereja)
-});
-
-frutas.splice(2, 1, "Melancia"); // Remove o item no índice 2 e adiciona "Melancia" no lugar
-console.log(frutas); // Exibe o array atualizado no console (Nactarina, Maçã, Melancia, Uva, Cereja)
-
-frutas.splice(1, 0, "Pera"); // Adiciona "Pera" no índice 1 sem remover nenhum item
-console.log(frutas); // Exibe o array atualizado no console (Nactarina, Pera, Maçã, Melancia, Uva, Cereja)
-
-frutas.splice(3, 2); // Remove 2 itens a partir do índice 3 (Melancia e Uva)
-console.log(frutas); // Exibe o array atualizado no console (Nactarina, Pera, Maçã, Cereja)
-
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//======== Aula (15/05/2026) de Funções =============
-//Calculo de IMC usando funções aninhadas (função que retorna outra função)
-
-function meuPeso(peso) {
-    return function (altura) {
-        return peso / (altura ** 2);
-    }
-}
-
-// Calculando com seus dados: 82kg e 1.75m
-let valorIMC = meuPeso(82)(1.75);
-*/
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------

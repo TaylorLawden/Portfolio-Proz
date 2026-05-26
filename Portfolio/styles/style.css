@@ -46,12 +46,14 @@ html, body {
 
 
 /* ========= Fundo das seções =========== */
-
 /* Seção 1 — Apresentação (sua foto) */
 main {
     background-image: url('/Portfolio/imagens/foto_Do_Luiz.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
+}    
+#minhaBio {
+    padding: 20px 80px;
 }
 
 /* ---------------------------------------------------------------------------------------------------------------- */
