@@ -1,6 +1,6 @@
 // ======== Modo claro e escuro ========
 
-const botao = document.getElementById("modoClaro/Escuro");     // Pega o botão no HTML pelo seu ID
+const botao = document.getElementById("modoClaro/Azul");     // Pega o botão no HTML pelo seu ID
 
 let claro = true;     // Variável que controla qual modo está ativo no momento (começa no modo claro)
 
@@ -16,8 +16,8 @@ function criarModo(corFundo, corTexto, textoBotao) {     // Recebe as 3 configur
 // ─── Função que aplica o modo na página ──────────────────────────────────
 function aplicarModo() {     // Chamada sempre que o botão for clicado
   const modo = claro
-    ? criarModo("black", "blue", "Modo Claro")   // Modo escuro: fundo preto, texto branco
-    : criarModo("white", "black", "Modo Escuro"); // Modo claro: fundo cinza, texto preto
+    ? criarModo("black", "blue", "Modo Claro")   // Modo azul: fundo preto, texto azul
+    : criarModo("white", "black", "Modo Azul"); // Modo claro: fundo cinza, texto preto
 
   document.body.style.backgroundColor = modo.corFundo;    // Aplica a cor de fundo na página
   document.body.style.color           = modo.corTexto;    // Aplica a cor do texto na página

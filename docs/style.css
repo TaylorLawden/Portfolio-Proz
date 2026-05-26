@@ -1,5 +1,5 @@
 /* ========= Botão de Modo Claro/Escuro fixo no canto superior direito =========== */
-#modoClaro\/Escuro {
+#modoClaro\/Azul {
     position: fixed;       /* Fica fixo na tela mesmo ao scrollar */
     top: 16px;             /* Distância do topo */
     right: 16px;           /* Distância da direita */
