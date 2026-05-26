@@ -52,7 +52,7 @@ html, body {
 /* ========= Fundo das seções =========== */
 /* Seção 1 — Apresentação (sua foto) */
 main {
-    background-image: url('/docs/foto_Do_Luiz.jpeg');
+    background-image: url('foto_Do_Luiz.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
 }    
@@ -152,7 +152,7 @@ main {
 
 /* Seção 3 — Projetos (quadro branco) */
 #meusProjetos {
-    background-image: url('/docs/foto_Quadro_Branco.jpeg');
+    background-image: url('foto_Quadro_Branco.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -160,7 +160,7 @@ main {
 
 /* Seção 4 — Quiz (universo) */
 #quiz {
-    background-image: url('/docs/foto_Do_Universo.jpeg');
+    background-image: url('foto_Do_Universo.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -168,7 +168,7 @@ main {
 
 /* Seção 5 — Contato (e-mail) */
 #areaContato {
-    background-image: url('/docs/email_Desenho.jpeg');
+    background-image: url('email_Desenho.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -215,7 +215,7 @@ main {
 
 /* ========= Seção de Frases de Pensadores =========== */
 #areaFrases {
-    background-image: url('/docs/foto_Do_Universo.jpeg');
+    background-image: url('foto_Do_Universo.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
